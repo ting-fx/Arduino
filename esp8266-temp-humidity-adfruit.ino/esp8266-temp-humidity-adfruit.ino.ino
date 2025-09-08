@@ -16,11 +16,11 @@ const char *password = "";   // Replace with your WiFi password
 
 #define AIO_USERNAME    ""
 #define AIO_KEY         ""
-#define AIO_FEED        ""
 
 // MQTT Broker settings
 const char *mqtt_broker = "io.adafruit.com"; // Broker Host
-const char *mqtt_topic = "";                 // MQTT topic
+const char *mqtt_topic_temp = "";            // MQTT temperatur topic
+const char *mqtt_topic_hum = "";             // MQTT humidity topic
 const int mqtt_port = 1883;                  // MQTT port (TCP)
 
 WiFiClient espClient;
@@ -43,17 +43,26 @@ void loop() {
         connectToMQTTBroker();
     }
 
-    int temperature = 0;
-    int humidity = 0;
-    char payload[100];
+    int temperature = 18;
+    int humidity = 72;
+    char buff[100];
 
     // Attempt to read the temperature and humidity values from the DHT11 sensor.
     int result = dht11.readTemperatureHumidity(temperature, humidity);
 
     if(result == 0){
-        sprintf(payload, "Temperatur: %d °C, Humididy:%d %%", temperature, humidity);
-        mqtt_client.publish(mqtt_topic, payload);
-        Serial.print(payload);
+        sprintf(buff, "%d", temperature);
+
+        // Publish temperature.
+        mqtt_client.publish(mqtt_topic_temp, buff);
+
+        sprintf(buff, "%d", humidity);
+
+        // Publish huimdity.
+        mqtt_client.publish(mqtt_topic_hum, buff);
+
+        sprintf(buff, "Temperatur: %d °C, Humididy:%d %%", temperature, humidity);
+        Serial.print(buff);
         Serial.print("\n");
 
     } else{
