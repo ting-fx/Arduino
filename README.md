@@ -54,10 +54,6 @@ Wiring
 ## Setup Instructions
 
 1. **Clone this repository:**
-    ```sh
-    git clone https://github.com/your-username/esp8266-adafruit-logger.git
-    cd esp8266-adafruit-logger
-    ```
 
 2. **Open the `.ino` file in Arduino IDE.**
 
