@@ -5,8 +5,8 @@
 #define LED 12
 
 // WiFi
-const char *ssid = "902-2.4G"; // Enter your WiFi name
-const char *password = "zxcvbn123456";  // Enter WiFi password
+const char *ssid = ""; // Enter your WiFi name
+const char *password = "";  // Enter WiFi password
 
 // MQTT Broker
 const char *mqtt_broker = "broker.emqx.io";
